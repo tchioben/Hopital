@@ -10,7 +10,7 @@ public class Specialite {
 
 	private String name;
 	
-	private String compteRendu;
+	private FicheSuivi ficheSuivi;
 	
 	public Specialite(String name){
 		this.setName(name);
@@ -19,15 +19,15 @@ public class Specialite {
 	/**
 	 * @return the compteRendu
 	 */
-	public String getCompteRendu() {
-		return compteRendu;
+	public FicheSuivi getCompteRendu() {
+		return ficheSuivi;
 	}
 
 	/**
 	 * @param compteRendu the compteRendu to set
 	 */
-	public void setCompteRendu(String compteRendu) {
-		this.compteRendu = compteRendu;
+	public void setCompteRendu(FicheSuivi ficheSuivi) {
+		this.ficheSuivi = ficheSuivi;
 	}
 
 	/**

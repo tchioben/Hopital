@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * 
  */
@@ -18,11 +20,15 @@ public class Patient {
 	
 	private FicheSejour fiche;
 	
+	private ArrayList<FicheSuivi> ficheSuivi;
+	
 	public Patient(String name, String numSecu, String adresse, int age){
 		this.setName(name);
 		this.setNumSecu(numSecu);
 		this.setAdresse(adresse);
 		this.setAge(age);
+		this.ficheSuivi = new ArrayList<FicheSuivi>();
+		
 	}
 
 	/**
