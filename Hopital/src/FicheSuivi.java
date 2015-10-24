@@ -1,14 +1,14 @@
-/**
- * 
- */
-
-/**
+ /**
  * @author bailleulb
  *
  */
 public class FicheSuivi {
 
 	private Specialite spec;
+	
+	public FicheSuivi(Specialite spec){
+		this.setSpec(spec);
+	}
 
 	/**
 	 * @return the spec

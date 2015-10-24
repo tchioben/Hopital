@@ -1,13 +1,6 @@
 import java.util.ArrayList;
 
-/**
- * 
- */
 
-/**
- * @author bailleulb
- *
- */
 public class Patient {
 
 	private String name;
@@ -80,12 +73,6 @@ public class Patient {
 		return fiche;
 	}
 
-	/**
-	 * @param fiche the fiche to set
-	 */
-	public void setFiche(FicheSejour fiche) {
-		this.fiche = fiche;
-	}
 
 	/**
 	 * @return the age
@@ -99,5 +86,13 @@ public class Patient {
 	 */
 	public void setAge(int age) {
 		this.age = age;
+	}
+
+	public void add(FicheSuivi fs) {
+		this.ficheSuivi.add(fs);		
+	}
+	
+	public ArrayList<FicheSuivi> getFicheSuivi(){
+		return this.ficheSuivi;
 	}
 }

@@ -12,8 +12,9 @@ public class Specialiste {
 
 	private Specialite specialite;
 
-	public Specialiste(String name){
+	public Specialiste(String name, Specialite spec){
 		this.setName(name);
+		this.specialite= spec;
 	}
 
 	/**

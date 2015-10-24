@@ -1,33 +1,38 @@
 import java.util.ArrayList;
-
-/**
- * 
- */
+import java.util.HashMap;
 
 /**
  * @author bailleulb
  *
  */
 public class FicheSejour {
-
-	private ArrayList<Specialite> compteRendu;
+	
+	private HashMap<Specialite,ArrayList<CompteRendu>> lesComptesRendus;
 	
 	public FicheSejour(){
-		this.setCompteRendu(new ArrayList<Specialite>());
+		this.lesComptesRendus=new HashMap<Specialite,ArrayList<CompteRendu>>();
 	}
 
 	/**
-	 * @return the compteRendu
+	 * @return la hashmap contenant la liste des comptes-rendu par specialite
 	 */
-	public ArrayList<Specialite> getCompteRendu() {
-		return compteRendu;
+	public HashMap<Specialite, ArrayList<CompteRendu>> getFichesSuivi() {
+		return lesComptesRendus;
 	}
 
 	/**
-	 * @param compteRendu the compteRendu to set
+	 * permet de recuperer la liste des comptes rendus pour une specialite
+	 * @param Specialite, la specialite que l'on cherche
+	 * @return la liste des comptes rendus pour cette specialite
 	 */
-	public void setCompteRendu(ArrayList<Specialite> compteRendu) {
-		this.compteRendu = compteRendu;
+	public ArrayList<CompteRendu> getFicheSuivi(Specialite spec){
+		return this.lesComptesRendus.get(spec);
+	}	
+	
+	public void addCompteRendu(CompteRendu cr){
+		Specialiste medecin = cr.getSpecialiste();
+		Specialite spec= medecin.getSpecialite();
+		this.lesComptesRendus.get(spec).add(cr);
 	}
 	
 	
