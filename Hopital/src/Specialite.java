@@ -3,32 +3,17 @@
  */
 
 /**
- * @author bailleulb
+ * @author Léa Vanelle, Benoît Bailleul
  *
  */
 public class Specialite {
 
 	private String name;
 	
-	private FicheSuivi ficheSuivi;
-	
 	public Specialite(String name){
 		this.setName(name);
 	}
 
-	/**
-	 * @return the compteRendu
-	 */
-	public FicheSuivi getCompteRendu() {
-		return ficheSuivi;
-	}
-
-	/**
-	 * @param compteRendu the compteRendu to set
-	 */
-	public void setCompteRendu(FicheSuivi ficheSuivi) {
-		this.ficheSuivi = ficheSuivi;
-	}
 
 	/**
 	 * @return the name
@@ -44,5 +29,14 @@ public class Specialite {
 		this.name = name;
 	}
 	
+	public boolean equals(Object o){
+		 return ((this.name == ((Specialite) o).getName())) ;
+	}
+	
+	public int hashCode(){
+		int hash= 1;
+		hash += hash *17 + this.name.hashCode();
+		return hash;
+	}
 	
 }

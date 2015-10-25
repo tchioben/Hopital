@@ -3,7 +3,7 @@
  */
 
 /**
- * @author bailleulb
+ * @author Léa Vanelle, Benoît Bailleul
  *
  */
 public class Specialiste {

@@ -2,8 +2,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * @author bailleulb
- *
+ * @author Léa Vanelle, Benoît Bailleul
  */
 public class FicheSejour {
 	
