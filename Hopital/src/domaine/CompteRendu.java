@@ -1,4 +1,8 @@
 package domaine;
+
+import java.util.Calendar;
+import java.util.Date;
+
 /**
  * 
  */
@@ -9,53 +13,39 @@ package domaine;
  */
 public class CompteRendu {
 
-	private String date;
+	/** La date de création du compte rendu */
+	private Date date;
 	
+	/** Le contenu du compte rendu */
 	private String corps;
 	
+	/** Le specialiste ayant rédigé le compte rendu */
 	private Specialiste specialiste;
 
 	public CompteRendu(Specialiste spec){
 		this.specialiste= spec;
-		this.date= "aujourd'hui";
+		this.date= Calendar.getInstance().getTime();
 	}
 	
-	public CompteRendu(Specialiste spec, String date){
+	public CompteRendu(Specialiste spec, Date date){
 		this.specialiste= spec;
 		this.date= date;
 	}
 	
-	public Specialiste getSpecialiste() {
-		return this.specialiste;
-	}
+	/** @return le specialiste */
+	public Specialiste getSpecialiste() { return this.specialiste; }
 
-	/**
-	 * @return the corps
-	 */
-	public String getCorps() {
-		return corps;
-	}
+	/** @return the corps */
+	public String getCorps() { return corps; }
 
-	/**
-	 * @param corps the corps to set
-	 */
-	public void setCorps(String corps) {
-		this.corps = corps;
-	}
+	/** @param corps the corps to set */
+	public void setCorps(String corps) { this.corps = corps; }
 
-	/**
-	 * @return the date
-	 */
-	public String getDate() {
-		return date;
-	}
+	/** @return the date */
+	public Date getDate() { return date; }
 
-	/**
-	 * @param date the date to set
-	 */
-	public void setDate(String date) {
-		this.date = date;
-	}
+	/** @param date the date to set */
+	public void setDate(Date date) { this.date = date; }
 	
 	
 	
