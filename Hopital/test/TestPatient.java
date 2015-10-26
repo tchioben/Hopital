@@ -4,7 +4,10 @@ import org.junit.*;
 
 import static org.junit.Assert.*;
 
-
+/**
+ * @author Léa Vanelle, Benoît Bailleul
+ *
+ */
 public class TestPatient {
 
 		@Test

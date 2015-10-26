@@ -3,7 +3,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 /**
- * @author Benoît
+ * @author Léa Vanelle, Benoît Bailleul
  *
  */
 public class TestFicheSejour {
