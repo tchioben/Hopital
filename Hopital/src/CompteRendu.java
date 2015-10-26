@@ -14,6 +14,11 @@ public class CompteRendu {
 	
 	private Specialiste specialiste;
 
+	public CompteRendu(Specialiste spec){
+		this.specialiste= spec;
+		this.date= "aujourd'hui";
+	}
+	
 	public CompteRendu(Specialiste spec, String date){
 		this.specialiste= spec;
 		this.date= date;
