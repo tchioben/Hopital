@@ -4,6 +4,7 @@
 package fabrique;
 
 import domaine.FicheSejour;
+import domaine.Patient;
 
 
 /** 
@@ -26,7 +27,9 @@ public class FabriqueFicheSejour {
 	}
 	
 	/** cree une fiche de sejour*/
-	public FicheSejour createFicheSejour(){
-		return new FicheSejour();
+	public FicheSejour createFicheSejour(Patient p){
+		FicheSejour fs = new FicheSejour();
+		p.setFicheSejour(fs);
+		return fs;
 	}
 }

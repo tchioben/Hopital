@@ -37,13 +37,15 @@ public class EntreePatient {
 			String NumSecu = EntreePatient.SaisieNumSecuPatient();
 			String Adresse = EntreePatient.SaisieAdressePatient();
 			int Age = EntreePatient.SaisieAgePatient();
-			fp.createPatient(NomPatient, NumSecu, Adresse, Age);
+			p = fp.createPatient(NomPatient, NumSecu, Adresse, Age);
+			System.out.println("Le nouveau patient ("+ p.getName()+") a été créée.");
 		}
 		FicheSejour fs = p.getFicheSejour();
 		if (fs == null){ // Si le patient a déjà une fiche de séjour c'est qu'il est déjà entré à l'hopital
 			// Il faut creer une fiche de sejour pour le patient
+			System.out.println("Creation d'une fiche de sejour pour le patient " + p.getName());
 			FabriqueFicheSejour ffs = FabriqueFicheSejour.getINSTANCE();
-			fs = ffs.createFicheSejour();
+			fs = ffs.createFicheSejour(p);
 			ArrayList<String> spes = EntreePatient.SaisieSpecialites();
 			FabriqueSpecialite fspe = FabriqueSpecialite.getINSTANCE();
 			// Ajout des spécialités à la fiche de sejour
@@ -52,6 +54,7 @@ public class EntreePatient {
 				 if (s==null) { fs.addSpecialite(fspe.createSpecialite(spe)); }
 				 else { fs.addSpecialite(s);}
 			}
+			System.out.println("Ce patient devra consulter les specialistes en " + p.getFicheSejour().SpeToString());
 		} else {
 			throw (new Exception("Ce patient est déjà entré dans l'hopital !"));
 		}

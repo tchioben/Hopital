@@ -19,7 +19,8 @@ public class Main {
 		System.out.println("Veuillez entrer " + objet +" : ");
 		Scanner sc = new Scanner(System.in);
 		String sObjet = sc.nextLine();
-		sc.close();
+		// sc.nextLine();
+		//sc.close();
 		return sObjet;
 	}
 	
@@ -27,8 +28,23 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		// TODO Autre cas
+		String choix = "";
+		while (choix != "0"){ 
+			System.out.println("Que voulez vous faire ?\n - Sortir : tapez 0\n - Réaliser l'entrée d'un patient : tapez 1");
+			choix = Main.Saisie("le numéro correspondant à votre choix");
+			switch (choix) {
+			case "1": try {
+					EntreePatient.EntreeDunPatient();
+				} catch (Exception e) {
+					System.out.println("Ce patient est déjà présent dans l'hopital !");
+				}
+				break;
+			default: choix = "0";
+				break;
+			}
+		}
+		System.out.println("Au revoir et à bientôt");
 	}
 
 }

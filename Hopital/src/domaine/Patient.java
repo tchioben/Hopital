@@ -96,4 +96,10 @@ public class Patient {
 	public ArrayList<FicheSuivi> getFicheSuivi(){
 		return this.ficheSuivi;
 	}
+	
+	public void setFicheSejour(FicheSejour fs){
+		if(this.ficheSejour == null){
+			this.ficheSejour = fs;
+		}
+	}
 }

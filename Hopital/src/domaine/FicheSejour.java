@@ -1,6 +1,7 @@
 package domaine;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 
 /**
  * @author Léa Vanelle, Benoît Bailleul
@@ -58,5 +59,13 @@ public class FicheSejour {
 		this.lesComptesRendus.get(spec).add(cr);
 	}
 	
+	public String SpeToString(){
+		String sSpes = "";
+		Set<Specialite> lesSpes = lesComptesRendus.keySet();
+		for (Specialite specialite : lesSpes) {
+			sSpes = sSpes + specialite.getName() + ", ";
+		}
+		return sSpes.substring(0, sSpes.length()-2);
+	}
 	
 }
