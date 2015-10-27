@@ -12,7 +12,7 @@ public class Patient {
 	
 	private int age;
 	
-	private FicheSejour fiche;
+	private FicheSejour ficheSejour;
 	
 	private ArrayList<FicheSuivi> ficheSuivi;
 	
@@ -22,11 +22,11 @@ public class Patient {
 		this.setAdresse(adresse);
 		this.setAge(age);
 		this.ficheSuivi = new ArrayList<FicheSuivi>();
-		
+		this.ficheSejour = null;
 	}
 
 	/**
-	 * @return the adresse
+	 * @return l'adresse du patient
 	 */
 	public String getAdresse() {
 		return adresse;
@@ -70,8 +70,8 @@ public class Patient {
 	/**
 	 * @return the fiche
 	 */
-	public FicheSejour getFiche() {
-		return fiche;
+	public FicheSejour getFicheSejour() {
+		return this.ficheSejour;
 	}
 
 

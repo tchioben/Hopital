@@ -38,7 +38,7 @@ public class FabriqueSpecialite {
 		this.lesSpecialites.put(p.getName(), p);
 	}
 
-	/** Crée un Specialite */
+	/** Crée une Specialite */
 	public Specialite createSpecialite(String name){
 		Specialite p = new Specialite(name);
 		this.setSpecialite(p);

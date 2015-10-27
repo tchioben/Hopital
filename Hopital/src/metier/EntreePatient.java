@@ -3,10 +3,15 @@
  */
 package metier;
 
-import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
 
+import domaine.FicheSejour;
 import domaine.Patient;
+import domaine.Specialite;
+import fabrique.FabriqueFicheSejour;
 import fabrique.FabriquePatient;
+import fabrique.FabriqueSpecialite;
 
 /** Entrée d'un patient
  * 
@@ -21,47 +26,69 @@ import fabrique.FabriquePatient;
 public class EntreePatient {
 	//public EntreePatient(){}
 	
-	public static void EntreeDunPatient(){
+	/** Réalise l'entree d'un patient */
+	public static void EntreeDunPatient() throws Exception{
 		FabriquePatient fp = FabriquePatient.getINSTANCE();
 		String NomPatient = EntreePatient.SaisieNomPatient();
 		Patient p = fp.searchPatient(NomPatient);
 		if (p == null){ // Le patient n'est pas encore connu
 			// Creation d'un nouveau patient
+			System.out.println("C'est un nouveau patient, il faut lui créer une fiche !");
 			String NumSecu = EntreePatient.SaisieNumSecuPatient();
 			String Adresse = EntreePatient.SaisieAdressePatient();
 			int Age = EntreePatient.SaisieAgePatient();
+			fp.createPatient(NomPatient, NumSecu, Adresse, Age);
+		}
+		FicheSejour fs = p.getFicheSejour();
+		if (fs == null){ // Si le patient a déjà une fiche de séjour c'est qu'il est déjà entré à l'hopital
+			// Il faut creer une fiche de sejour pour le patient
+			FabriqueFicheSejour ffs = FabriqueFicheSejour.getINSTANCE();
+			fs = ffs.createFicheSejour();
+			ArrayList<String> spes = EntreePatient.SaisieSpecialites();
+			FabriqueSpecialite fspe = FabriqueSpecialite.getINSTANCE();
+			// Ajout des spécialités à la fiche de sejour
+			for (String spe : spes) {
+				Specialite s = fspe.searchSpecialite(spe);
+				 if (s==null) { fs.addSpecialite(fspe.createSpecialite(spe)); }
+				 else { fs.addSpecialite(s);}
+			}
+		} else {
+			throw (new Exception("Ce patient est déjà entré dans l'hopital !"));
 		}
 	}
 	
+	/** Demande la saisie du nom du patient
+	 * @return une chaine de caractère contenant le nom du patient.
+	 */
 	public static String SaisieNomPatient(){
-		System.out.println("Veuillez entrer le nom du patient : ");
-		Scanner sc = new Scanner(System.in);
-		String NamePatient = sc.nextLine();
-		sc.close();
-		return NamePatient;
+		return Main.Saisie("le nom du patient");
 	}
-	
+	/** Demande la saisie du numero de securite sociale du patient
+	 * @return une chaine de caractere contenant le numéro de secu du patient
+	 */
 	public static String SaisieNumSecuPatient(){
-		System.out.println("Veuillez entrer le numéro de Secu du nouveau patient : ");
-		Scanner sc = new Scanner(System.in);
-		String NumSecuPatient = sc.nextLine();
-		sc.close();
-		return NumSecuPatient;
+		return Main.Saisie("le numéro de Secu du nouveau patient");
 	}
-	
+	/** Demande la saisie de l'adresse du patient 
+	 * @return l'adresse du patient sous forme de chaine de caractères
+	 */
 	public static String SaisieAdressePatient(){
-		System.out.println("Veuillez entrer l'adresse du nouveau patient : ");
-		Scanner sc = new Scanner(System.in);
-		String AdressePatient = sc.nextLine();
-		sc.close();
-		return AdressePatient;
+		return Main.Saisie("l'adresse du nouveau patient");
+	}
+	/** Demande la saisie de l'age d'un patient 
+	 * @return retourne un entier représentant l'age du patient
+	 */
+	public static int SaisieAgePatient(){
+		return Integer.parseInt(Main.Saisie("l'age du nouveau patient"));
 	}
 	
-	public static int SaisieAgePatient(){
-		System.out.println("Veuillez entrer l'age du nouveau patient : ");
-		Scanner sc = new Scanner(System.in);
-		int AgePatient = sc.nextInt();
-		sc.close();
-		return AgePatient;
+	/** Demande la saisie d'une liste de specialite, et renvoie cette liste 
+	 * @return la liste des specialités qui ont étaient saisies
+	 */
+	public static ArrayList<String> SaisieSpecialites(){
+		String Spes = Main.Saisie("les specialites que doit consulter le patient\n"
+				+ "(séparez les différentes spécialités par des point-virgules)");
+		ArrayList<String> SpeList = new ArrayList<String>(Arrays.asList(Spes.split(";")));
+		return SpeList;
 	}
 }

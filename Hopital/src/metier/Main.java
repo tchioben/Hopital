@@ -16,11 +16,11 @@ public class Main {
 	 * @return le nom de l'objet recherché
 	 */
 	public static String Saisie(String objet){
-		System.out.println("Veuillez entrer le nom du "+objet+" : ");
+		System.out.println("Veuillez entrer " + objet +" : ");
 		Scanner sc = new Scanner(System.in);
-		String nameSpecialiste = sc.nextLine();
+		String sObjet = sc.nextLine();
 		sc.close();
-		return nameSpecialiste;
+		return sObjet;
 	}
 	
 	/**

@@ -30,9 +30,9 @@ public class FicheSejour {
 	}	
 	
 	/**
-	 * specialite existe deja?
+	 * Est-ce que la specialite existe deja?
 	 * @param spec
-	 * @return
+	 * @return true si la specialité existe false sinon
 	 */
 	public boolean specialiteExiste(Specialite spec){
 		return (this.lesComptesRendus.get(spec)!=null);
@@ -47,7 +47,10 @@ public class FicheSejour {
 			this.lesComptesRendus.put(spec, new ArrayList<CompteRendu>());
 		}
 	}
-	
+	/**
+	 * Ajoute le compte rendu concernant une specialite
+	 * @param cr le compte rendu
+	 */
 	public void addCompteRendu(CompteRendu cr){
 		Specialiste medecin = cr.getSpecialiste();
 		Specialite spec= medecin.getSpecialite();
