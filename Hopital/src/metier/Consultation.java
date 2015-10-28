@@ -3,9 +3,15 @@
  */
 package metier;
 
+import java.util.ArrayList;
+
+import domaine.CompteRendu;
+import domaine.FicheSejour;
+import domaine.FicheSuivi;
 import domaine.Patient;
 import domaine.Specialiste;
 import fabrique.FabriqueCompteRendu;
+import fabrique.FabriqueFicheSejour;
 import fabrique.FabriquePatient;
 import fabrique.FabriqueSpecialiste;
 
@@ -39,11 +45,21 @@ public class Consultation {
 				System.out.println("Le Patient n'existe pas");
 			}
 			else {
-				FabriqueCompteRendu fcr = FabriqueCompteRendu.getINSTANCE();
-				/**
-				 * faire la liste des comptes rendu, on regarge les medecin qui ont une cette specialite et pour chaque medecin on recuperere sa liste de compte rendu)
-				 * 
-				 */
+				ArrayList<FicheSuivi> listeFicheSuivi = patient.getFicheSuivi();
+				ArrayList<CompteRendu> listeCompteRendu = new ArrayList<CompteRendu>();
+				for (FicheSuivi fiche : listeFicheSuivi){
+					if (fiche.getSpec().equals(specialiste.getSpecialite())){
+						listeCompteRendu = fiche.getComptesrendus();
+					}
+				}
+				for (CompteRendu compte : listeCompteRendu){
+					System.out.println(compte.getCorps());
+				}
+				 FabriqueFicheSejour ffs = FabriqueFicheSejour.getINSTANCE();
+				 FabriqueCompteRendu fcr = FabriqueCompteRendu.getINSTANCE();
+				 CompteRendu nouveauCompteRendu = fcr.createCompteRendu(specialiste);
+				 FicheSejour nouvelleFicheSejour = ffs.createFicheSejour(patient);
+				 nouvelleFicheSejour.addCompteRendu(nouveauCompteRendu);
 			}
 		}
 	}
