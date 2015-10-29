@@ -32,7 +32,7 @@ public class Consultation {
 	 * @param nomMedecin
 	 * @param nomPatient
 	 */
-	public void ajouteConsultation(String nomMedecin, String nomPatient){
+	public static void ajouteConsultation(String nomMedecin, String nomPatient){
 		FabriqueSpecialiste fs = FabriqueSpecialiste.getINSTANCE();
 		Specialiste specialiste= fs.searchSpecialiste(nomMedecin);
 		FabriquePatient fp = FabriquePatient.getINSTANCE();

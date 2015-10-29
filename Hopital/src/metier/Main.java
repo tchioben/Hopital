@@ -31,7 +31,8 @@ public class Main {
 		// TODO Autre cas
 		String choix = "";
 		while (choix != "0"){ 
-			System.out.println("Que voulez vous faire ?\n - Sortir : tapez 0\n - Réaliser l'entrée d'un patient : tapez 1");
+			System.out.println("Que voulez vous faire ?\n - Sortir : tapez 0\n - Réaliser l'entrée d'un patient : tapez 1\n "
+					+ "- Ajouter une consultation à un patient: tapez 2\n");
 			choix = Main.Saisie("le numéro correspondant à votre choix");
 			switch (choix) {
 			case "1": try {
@@ -40,9 +41,15 @@ public class Main {
 					System.out.println("Ce patient est déjà présent dans l'hopital !");
 				}
 				break;
+			case "2":
+				String nomMedecin = Saisie("le nom du médecin");
+				String nomPatient = Saisie("le nom du patient");
+				Consultation.ajouteConsultation(nomMedecin, nomPatient);
+				break;	
 			default: choix = "0";
 				break;
 			}
+			
 		}
 		System.out.println("Au revoir et à bientôt");
 	}
