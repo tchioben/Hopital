@@ -85,4 +85,27 @@ public class FicheSejour {
 		this.listeSpecialite = listeSpecialite;
 	}
 	
+	public ArrayList<CompteRendu> listeCompteRendu(){
+		ArrayList<CompteRendu> lcr = new ArrayList<CompteRendu>();
+		for (Specialite spec:listeSpecialite){
+			ArrayList<CompteRendu> lcr2 = this.lesComptesRendus.get(spec);
+			for ( CompteRendu cr: lcr2){
+				lcr.add(cr);
+			}
+		}
+		return lcr;
+	}
+	
+	
+	public void imprimeCompteRendu(){
+		ArrayList<CompteRendu> lcr = this.listeCompteRendu();
+		int i = 0;
+		for (CompteRendu cr:lcr){
+			System.out.println("\nCompte Rendu numéro "+i+":");
+			System.out.println("\nSpécialite : "+cr.getSpecialiste().getSpecialite().getName());
+			System.out.println("\nMédecin : "+cr.getSpecialiste().getName());
+			System.out.println("\n"+cr.getCorps()+"\n");
+			i += 1;
+		}
+	}
 }

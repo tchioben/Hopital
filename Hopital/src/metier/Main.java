@@ -5,6 +5,9 @@ package metier;
 
 import java.util.Scanner;
 
+import domaine.Specialite;
+import fabrique.FabriqueSpecialiste;
+
 /**
  * @author Léa Vanelle, Benoît Bailleul
  *
@@ -28,11 +31,14 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		FabriqueSpecialiste fspec = FabriqueSpecialiste.getINSTANCE();
+		fspec.createSpecialiste("benoit", new Specialite("Ophtalmo"));
 		// TODO Autre cas
 		String choix = "";
 		while (choix != "0"){ 
 			System.out.println("Que voulez vous faire ?\n - Sortir : tapez 0\n - Réaliser l'entrée d'un patient : tapez 1\n "
-					+ "- Ajouter une consultation à un patient: tapez 2\n");
+					+ "- Ajouter une consultation à un patient: tapez 2\n"
+					+ "- Visualiser la fiche séjour d'un patient: tapez 3\n");
 			choix = Main.Saisie("le numéro correspondant à votre choix");
 			switch (choix) {
 			case "1": try {
@@ -45,7 +51,11 @@ public class Main {
 				String nomMedecin = Saisie("le nom du médecin");
 				String nomPatient = Saisie("le nom du patient");
 				Consultation.ajouteConsultation(nomMedecin, nomPatient);
-				break;	
+				break;
+			case "3":
+				String nomPatient2 = Saisie("le nom du patient");
+				VisualiserSejour.visualiserSejour(nomPatient2);
+				break;
 			default: choix = "0";
 				break;
 			}

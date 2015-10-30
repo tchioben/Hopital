@@ -3,13 +3,8 @@
  */
 package metier;
 
-import java.util.ArrayList;
-
-import domaine.CompteRendu;
 import domaine.FicheSejour;
 import domaine.Patient;
-import domaine.Specialiste;
-import domaine.Specialite;
 import fabrique.FabriquePatient;
 
 /** Visualiser sejour
@@ -30,9 +25,7 @@ public class VisualiserSejour {
 		}
 		else {
 			FicheSejour fs = patient.getFicheSejour();
-			ArrayList<Specialite> listeSpec = fs.getListeSpecialite();
-			ArrayList<S>
-			for (Specialite spec:listeSpec){
+			fs.imprimeCompteRendu();
 				
 			}
 		}
