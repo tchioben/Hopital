@@ -10,8 +10,11 @@ public class FicheSejour {
 	
 	private HashMap<Specialite,ArrayList<CompteRendu>> lesComptesRendus;
 	
+	private ArrayList<Specialite> listeSpecialite;
+	
 	public FicheSejour(){
 		this.lesComptesRendus=new HashMap<Specialite,ArrayList<CompteRendu>>();
+		this.listeSpecialite = new ArrayList<Specialite>();
 	}
 
 	/**
@@ -66,6 +69,20 @@ public class FicheSejour {
 			sSpes = sSpes + specialite.getName() + ", ";
 		}
 		return sSpes.substring(0, sSpes.length()-2);
+	}
+
+	/**
+	 * @return the listeSpecialite
+	 */
+	public ArrayList<Specialite> getListeSpecialite() {
+		return listeSpecialite;
+	}
+
+	/**
+	 * @param listeSpecialite the listeSpecialite to set
+	 */
+	public void setListeSpecialite(ArrayList<Specialite> listeSpecialite) {
+		this.listeSpecialite = listeSpecialite;
 	}
 	
 }
