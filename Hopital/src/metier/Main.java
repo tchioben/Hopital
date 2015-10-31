@@ -6,6 +6,7 @@ package metier;
 import java.util.Scanner;
 
 import domaine.Specialite;
+import fabrique.FabriquePatient;
 import fabrique.FabriqueSpecialiste;
 
 /**
@@ -56,6 +57,13 @@ public class Main {
 				String nomPatient2 = Saisie("le nom du patient");
 				VisualiserSejour.visualiserSejour(nomPatient2);
 				break;
+			case "6":
+				FabriqueSpecialiste fp= FabriqueSpecialiste.getINSTANCE();
+				fp.createSpecialiste("benoit", new Specialite("Ophtalmo"));
+				FabriquePatient fp1= FabriquePatient.getINSTANCE();
+				fp1.createPatient("lea", "1212121212121", "je ne sais plus ^^", 60);
+				break;
+			
 			default: choix = "0";
 				break;
 			}

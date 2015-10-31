@@ -22,7 +22,7 @@ public class Patient {
 		this.setAdresse(adresse);
 		this.setAge(age);
 		this.ficheSuivi = new ArrayList<FicheSuivi>();
-		this.ficheSejour = null;
+		this.ficheSejour = new FicheSejour();
 	}
 
 	/**
