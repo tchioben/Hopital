@@ -27,7 +27,7 @@ public class EntreePatient {
 	//public EntreePatient(){}
 	
 	/** Réalise l'entree d'un patient */
-	public static void EntreeDunPatient() throws Exception{
+	public static void EntreeDunPatient() {
 		FabriquePatient fp = FabriquePatient.getINSTANCE();
 		String NomPatient = EntreePatient.SaisieNomPatient();
 		Patient p = fp.searchPatient(NomPatient);
@@ -56,7 +56,8 @@ public class EntreePatient {
 			}
 			System.out.println("Ce patient devra consulter les specialistes en " + p.getFicheSejour().SpeToString());
 		} else {
-			throw (new Exception("Ce patient est déjà entré dans l'hopital !"));
+			System.out.println("Ce patient est déjà entré dans l'hopital !");
+			return;
 		}
 	}
 	

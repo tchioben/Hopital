@@ -2,6 +2,11 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import domaine.CompteRendu;
+import domaine.FicheSejour;
+import domaine.Specialiste;
+import domaine.Specialite;
+
 /**
  * @author Léa Vanelle, Benoît Bailleul
  *

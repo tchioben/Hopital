@@ -1,8 +1,6 @@
 package domaine;
 import java.util.ArrayList;
 
-import fabrique.FabriqueFicheSejour;
-
 
 public class Patient {
 	/** Le nom du patient */
@@ -30,7 +28,7 @@ public class Patient {
 		this.setAdresse(adresse);
 		this.setAge(age);
 		this.ficheSuivi = new ArrayList<FicheSuivi>();
-		this.ficheSejour = FabriqueFicheSejour.getINSTANCE().createFicheSejour(this);
+		this.ficheSejour = null;//FabriqueFicheSejour.getINSTANCE().createFicheSejour(this);
 	}
 
 	/** Permet de connaitre l'adresse du patient
@@ -75,14 +73,6 @@ public class Patient {
 		this.name = name;
 	}
 
-	/** Permet de récupérer la fiche de séjouor du patient
-	 * @return la fiche de sejour du patient
-	 */
-	public FicheSejour getFicheSejour() {
-		return this.ficheSejour;
-	}
-
-
 	/** Permet de connaitre l'age du patient
 	 * @return l'age du patient
 	 */
@@ -100,7 +90,7 @@ public class Patient {
 	/** Ajoute une fiche de suivi au patient
 	 * @param fs la fiche de suivi a attribuer au patient
 	 */
-	public void add(FicheSuivi fs) {
+	public void addFicheSuivi(FicheSuivi fs) {
 		this.ficheSuivi.add(fs);		
 	}
 	
@@ -110,6 +100,17 @@ public class Patient {
 	public ArrayList<FicheSuivi> getFicheSuivi(){
 		return this.ficheSuivi;
 	}
+	/** Recherche une fiche de suivi concernant la specialite passee en parametre
+	 * @param spe la specialite pour laquelle on recherche une fiche de suivi
+	 */
+	public FicheSuivi searchFicheSuivi(Specialite spe){
+		for (FicheSuivi fs : this.getFicheSuivi()) {
+			if (fs.getSpec() == spe){
+				return fs;
+			}
+		}
+		return null;
+	}
 	
 	/** Ajoute une fiche de sejour au patient
 	 * @param fs la fiche de sejour a attribuer au patient
@@ -118,5 +119,12 @@ public class Patient {
 		if(this.ficheSejour == null){
 			this.ficheSejour = fs;
 		}
+	}
+	
+	/** Permet de récupérer la fiche de séjouor du patient
+	 * @return la fiche de sejour du patient
+	 */
+	public FicheSejour getFicheSejour() {
+		return this.ficheSejour;
 	}
 }
