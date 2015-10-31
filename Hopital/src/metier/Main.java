@@ -9,23 +9,21 @@ import java.util.Scanner;
 import domaine.Specialite;
 import fabrique.FabriquePatient;
 import fabrique.FabriqueSpecialiste;
+import fabrique.FabriqueSpecialite;
 
 /**
  * @author Léa Vanelle, Benoît Bailleul
  *
  */
 public class Main {
-
+	public static Scanner sc = new Scanner(System.in);
 	/**
 	 * Saisie d'un objet
 	 * @return le nom de l'objet recherché
 	 */
 	public static String Saisie(String objet){
 		System.out.println("Veuillez entrer " + objet +" : ");
-		Scanner sc = new Scanner(System.in);
 		String sObjet = sc.nextLine();
-		// sc.nextLine();
-		//sc.close();
 		return sObjet;
 	}
 	
@@ -33,9 +31,10 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		FabriqueSpecialiste fspec = FabriqueSpecialiste.getINSTANCE();
-		fspec.createSpecialiste("benoit", new Specialite("Ophtalmo"));
-		// TODO Autre cas
+		FabriqueSpecialiste fSpecialiste = FabriqueSpecialiste.getINSTANCE();
+		FabriqueSpecialite fSpecialite = FabriqueSpecialite.getINSTANCE();
+		fSpecialiste.createSpecialiste("Benoit", fSpecialite.createSpecialite("Ophtalmo"));
+		fSpecialiste.createSpecialiste("Lea", fSpecialite.createSpecialite("Odonto"));
 		String choix = "";
 		while (choix != "0"){ 
 			System.out.println("Que voulez vous faire ?\n - Sortir : tapez 0\n - Réaliser l'entrée d'un patient : tapez 1\n "

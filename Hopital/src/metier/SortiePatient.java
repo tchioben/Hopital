@@ -59,33 +59,6 @@ public class SortiePatient {
 				HMSpeCpteRdus.remove(spe);
 			}
 		}
-		/*if (FSej.getFichesSuivi().isEmpty()){
-			System.out.println("Ce patient n'a pas de séjout en cours.\nIl est peut-etre deja sorti ou il n'est pas encore entre.");
-			return;
-		}
-		// FicheSejour -> FicheSuivi
-		System.out.println("Transfert de la fiche de sejour vers la fiche de suivi en cours ...");
-		ArrayList<FicheSuivi> lFichSuiv = p.getFicheSuivi();
-		ArrayList<Specialite> lSpes = FSej.getListeSpecialite();
-		for (Specialite spe : lSpes) { // Pour toutes les specialites de la fiche de sejour
-			Iterator<FicheSuivi> it = lFichSuiv.iterator();
-			while (it.hasNext()) {
-				FicheSuivi FichSuiv = it.next();
-				if (FichSuiv.getSpec() == spe){
-					FichSuiv.setComptesrendus((FSej.getComptesRendus(spe)));
-					System.out.println("\tLe(s) compte(s) rendu(s) de la specialite " + spe.getName() + " \n\ta(ont) été ajouté(s) à la fiche de suivi du patient " + p.getName() + ".");
-					FSej.removeSpeEtComptesRendus(spe);
-				}
-			}	 
-		}
-		if (! lSpes.isEmpty()){
-			FabriqueFicheSuivi ffsuiv = FabriqueFicheSuivi.getINSTANCE();
-			for (Specialite spe : lSpes) {
-				FicheSuivi fSuiv = ffsuiv.createFicheSuivi(spe);
-				fSuiv.setComptesrendus(FSej.getComptesRendus(spe));
-				System.out.println("\tLe(s) compte(s) rendu(s) de la specialite " + spe.getName() +" \n\ta(ont) été ajouté(s) à la fiche de suivi du patient " + p.getName() + ".");
-			}	 
-		}*/
 	}
 	
 	/** Demande la saisie du nom du patient
