@@ -3,8 +3,15 @@
  */
 package metier;
 
+import java.util.ArrayList;
+
+import domaine.CompteRendu;
+import domaine.FicheSejour;
+import domaine.FicheSuivi;
 import domaine.Patient;
 import domaine.Specialiste;
+import fabrique.FabriqueCompteRendu;
+import fabrique.FabriqueFicheSejour;
 import fabrique.FabriquePatient;
 import fabrique.FabriqueSpecialiste;
 
@@ -38,7 +45,7 @@ public class Consultation {
 				System.out.println("Le patient n'existe pas");
 			}
 			else {
-				/**ArrayList<FicheSuivi> listeFicheSuivi = patient.getFicheSuivi();
+				ArrayList<FicheSuivi> listeFicheSuivi = patient.getFicheSuivi();
 				ArrayList<CompteRendu> listeCompteRendu = new ArrayList<CompteRendu>();
 				for (FicheSuivi fiche : listeFicheSuivi){
 					if (fiche.getSpec().equals(specialiste.getSpecialite())){
@@ -53,7 +60,7 @@ public class Consultation {
 				 CompteRendu nouveauCompteRendu = fcr.createCompteRendu(specialiste);
 				 FicheSejour nouvelleFicheSejour = ffs.createFicheSejour(patient);
 				 nouvelleFicheSejour.addCompteRendu(nouveauCompteRendu);
-			*/
+			
 				
 			}
 		}

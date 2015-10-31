@@ -47,6 +47,16 @@ public class CompteRendu {
 	/** @param date the date to set */
 	public void setDate(Date date) { this.date = date; }
 	
+	public boolean equals(Object o){
+		 return ((this.corps == ((CompteRendu) o).getCorps()) && this.specialiste.equals(((CompteRendu) o).getSpecialiste())) ;
+	}
+	
+	public int hashCode(){
+		int hash= 1;
+		hash += hash *23 + this.specialiste.hashCode();
+		return hash;
+	}
+	
 	
 	
 	

@@ -46,6 +46,14 @@ public class Specialiste {
 		this.specialite = specialite;
 	}
 	
+	public boolean equals(Object o){
+		 return ((this.name == ((Specialiste) o).getName()) && this.specialite.equals(((Specialiste) o).getSpecialite())) ;
+	}
 	
+	public int hashCode(){
+		int hash= 1;
+		hash += hash *17 + this.name.hashCode()+this.specialite.hashCode();
+		return hash;
+	}
 	
 }
