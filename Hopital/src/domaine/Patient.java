@@ -1,6 +1,8 @@
 package domaine;
 import java.util.ArrayList;
 
+import fabrique.FabriqueFicheSejour;
+
 
 public class Patient {
 	/** Le nom du patient */
@@ -28,7 +30,7 @@ public class Patient {
 		this.setAdresse(adresse);
 		this.setAge(age);
 		this.ficheSuivi = new ArrayList<FicheSuivi>();
-		this.ficheSejour = null;
+		this.ficheSejour = FabriqueFicheSejour.getINSTANCE().createFicheSejour(this);
 	}
 
 	/** Permet de connaitre l'adresse du patient
@@ -109,7 +111,7 @@ public class Patient {
 		return this.ficheSuivi;
 	}
 	
-	/** Ajoute une fiche de sejoour au patient
+	/** Ajoute une fiche de sejour au patient
 	 * @param fs la fiche de sejour a attribuer au patient
 	 */
 	public void setFicheSejour(FicheSejour fs){
