@@ -1,3 +1,9 @@
-/metier/
-/fabrique/
+/CompteRendu.class
+/FicheSejour.class
+/FicheSuivi.class
+/Patient.class
+/Specialiste.class
+/Specialite.class
 /domaine/
+/fabrique/
+/metier/

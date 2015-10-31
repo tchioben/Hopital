@@ -4,8 +4,10 @@
 package metier;
 
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.HashMap;
+import java.util.Map.Entry;
 
+import domaine.CompteRendu;
 import domaine.FicheSejour;
 import domaine.FicheSuivi;
 import domaine.Patient;
@@ -33,7 +35,31 @@ public class SortiePatient {
 			return ;
 		}
 		FicheSejour FSej = p.getFicheSejour(); // = HashMap<Specialite, ArrayList<CompteRendu>> + ArrayList<Specalite>
-		if (FSej == null){
+		HashMap<Specialite, ArrayList<CompteRendu>> HMSpeCpteRdus = FSej.getFichesSuivi();
+		if (HMSpeCpteRdus.size()==0){
+			System.out.println("Le patient " + p.getName() + " n'a pas de séjour en cours.\n"
+					+ "Il est peut etre deja sorti ou il n'est pas encore entre.");
+		}
+		else {
+			System.out.println("Transfert de la fiche de sejour vers la fiche de suivi en cours ...");
+			for (Entry<Specialite, ArrayList<CompteRendu>> speCpteRdu : HMSpeCpteRdus.entrySet()){
+				Specialite spe = speCpteRdu.getKey();
+				ArrayList<CompteRendu> lCpteRdu = speCpteRdu.getValue();
+				FicheSuivi ficheSuiviSpe = p.searchFicheSuivi(spe);
+				if (ficheSuiviSpe == null){ // Le patient n'a pas encore de fiche de suivi pour cette specialite -> creation
+					FabriqueFicheSuivi fFSuiv = FabriqueFicheSuivi.getINSTANCE();
+					FicheSuivi newFSuivi = fFSuiv.createFicheSuivi(spe);
+					newFSuivi.setComptesrendus(lCpteRdu);
+					p.addFicheSuivi(newFSuivi);
+				}
+				else { // Ajout des comptes rendu à la fiche de suivi existante
+					ficheSuiviSpe.setComptesrendus(lCpteRdu);
+				}
+				System.out.println("  - Le(s) compte(s) rendu(s) de la specialite " + spe.getName() + " a(ont) été tranfere(s) dans la fiche de suivi du patient " + p.getName() + ".");
+				HMSpeCpteRdus.remove(spe);
+			}
+		}
+		/*if (FSej.getFichesSuivi().isEmpty()){
 			System.out.println("Ce patient n'a pas de séjout en cours.\nIl est peut-etre deja sorti ou il n'est pas encore entre.");
 			return;
 		}
@@ -43,25 +69,23 @@ public class SortiePatient {
 		ArrayList<Specialite> lSpes = FSej.getListeSpecialite();
 		for (Specialite spe : lSpes) { // Pour toutes les specialites de la fiche de sejour
 			Iterator<FicheSuivi> it = lFichSuiv.iterator();
-			 while (it.hasNext()) {
+			while (it.hasNext()) {
 				FicheSuivi FichSuiv = it.next();
 				if (FichSuiv.getSpec() == spe){
 					FichSuiv.setComptesrendus((FSej.getComptesRendus(spe)));
 					System.out.println("\tLe(s) compte(s) rendu(s) de la specialite " + spe.getName() + " \n\ta(ont) été ajouté(s) à la fiche de suivi du patient " + p.getName() + ".");
 					FSej.removeSpeEtComptesRendus(spe);
 				}
-			 }	 
+			}	 
 		}
 		if (! lSpes.isEmpty()){
-			 FabriqueFicheSuivi ffsuiv = FabriqueFicheSuivi.getINSTANCE();
-			 for (Specialite spe : lSpes) {
-				 FicheSuivi fSuiv = ffsuiv.createFicheSuivi(spe);
-				 fSuiv.setComptesrendus(FSej.getComptesRendus(spe));
-				 System.out.println("\tLe(s) compte(s) rendu(s) de la specialite " + spe.getName() +" \n\ta(ont) été ajouté(s) à la fiche de suivi du patient " + p.getName() + ".");
-			 }
-			 
-		 }
-		
+			FabriqueFicheSuivi ffsuiv = FabriqueFicheSuivi.getINSTANCE();
+			for (Specialite spe : lSpes) {
+				FicheSuivi fSuiv = ffsuiv.createFicheSuivi(spe);
+				fSuiv.setComptesrendus(FSej.getComptesRendus(spe));
+				System.out.println("\tLe(s) compte(s) rendu(s) de la specialite " + spe.getName() +" \n\ta(ont) été ajouté(s) à la fiche de suivi du patient " + p.getName() + ".");
+			}	 
+		}*/
 	}
 	
 	/** Demande la saisie du nom du patient

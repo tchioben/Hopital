@@ -43,7 +43,7 @@ public class FabriquePatient {
 	public Patient createPatient(String name, String numSecu, String adresse, int age){
 		Patient p = new Patient(name, numSecu, adresse, age);
 		this.setPatient(p);
-		System.out.println("ajout patient ok");
+		//System.out.println("ajout patient ok");
 		return p;
 	}
 	
