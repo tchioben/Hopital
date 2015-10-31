@@ -33,6 +33,14 @@ public class FicheSejour {
 		return this.lesComptesRendus.get(spec);
 	}	
 	
+	/** Supprime la specialite et les comptes rendu de cette specialite
+	 * @param spe la specialite pour laquelle on veut l'entree dans la hashmap
+	 */
+	public void removeSpeEtComptesRendus(Specialite spe){
+		this.lesComptesRendus.remove(spe);
+		this.listeSpecialite.remove(this.listeSpecialite.indexOf(spe));
+	}
+	
 	/**
 	 * Est-ce que la specialite existe deja?
 	 * @param spec

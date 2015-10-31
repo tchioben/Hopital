@@ -30,10 +30,10 @@ public class FabriqueSpecialite {
 		return INSTANCE;
 	}
 	
-	/** @return La liste des Specialites de l'hopital	 */
+	/** @return La liste des Specialites de l'hopital */
 	public HashMap<String, Specialite> getLesSpecialites() {return lesSpecialites;}
 
-	/** @param p un Specialite de l'hopital */
+	/** @param p une Specialite de l'hopital */
 	public void setSpecialite(Specialite p) {
 		this.lesSpecialites.put(p.getName(), p);
 	}

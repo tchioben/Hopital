@@ -15,7 +15,6 @@ public class Specialite {
 		this.setName(name);
 	}
 
-
 	/**
 	 * @return the name
 	 */
