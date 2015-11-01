@@ -5,8 +5,6 @@ package metier;
 
 import java.util.Scanner;
 
-import domaine.Specialite;
-import fabrique.FabriquePatient;
 import fabrique.FabriqueSpecialiste;
 import fabrique.FabriqueSpecialite;
 
@@ -44,7 +42,7 @@ public class Main {
 		while (choix != "0"){ 
 			System.out.println("Que voulez vous faire ?\n "
 					+ "\t- Sortir : tapez 0\n"
-					+ "\t - Réaliser l'entrée d'un patient : tapez 1\n "
+					+ "\t- Réaliser l'entrée d'un patient : tapez 1\n "
 					+ "\t- Ajouter une consultation à un patient: tapez 2\n"
 					+ "\t- Visualiser la fiche séjour d'un patient: tapez 3\n"
 					+ "\t- Réaliser la sortie d'un patient : taper 4"
@@ -56,9 +54,8 @@ public class Main {
 				choix = "";
 				break;
 			case "2":
-				String nomMedecin = Saisie("le nom du médecin");
 				String nomPatient = Saisie("le nom du patient");
-				Consultation.ajouteConsultation(nomMedecin, nomPatient);
+				Consultation.consultation(nomPatient);
 				choix = "";
 				break;
 			case "3":
@@ -74,13 +71,7 @@ public class Main {
 				SortiePatient.SortieDunPatient();
 				choix = "";
 				break;
-			case "6":
-				FabriqueSpecialiste fp= FabriqueSpecialiste.getINSTANCE();
-				fp.createSpecialiste("benoit", new Specialite("Ophtalmo"));
-				FabriquePatient fp1= FabriquePatient.getINSTANCE();
-				fp1.createPatient("lea", "1212121212121", "je ne sais plus ^^", 60);
-				choix = "";
-				break;
+
 			
 			default: choix = "0";
 				break;

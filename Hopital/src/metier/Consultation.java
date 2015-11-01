@@ -7,11 +7,9 @@ import java.util.ArrayList;
 
 import domaine.CompteRendu;
 import domaine.FicheSejour;
-import domaine.FicheSuivi;
 import domaine.Patient;
 import domaine.Specialiste;
-import fabrique.FabriqueCompteRendu;
-import fabrique.FabriqueFicheSejour;
+import domaine.Specialite;
 import fabrique.FabriquePatient;
 import fabrique.FabriqueSpecialiste;
 
@@ -32,46 +30,45 @@ public class Consultation {
 	 * @param nomMedecin
 	 * @param nomPatient
 	 */
-	public static void ajouteConsultation(String nomMedecin, String nomPatient){
-		FabriqueSpecialiste fs = FabriqueSpecialiste.getINSTANCE();
-		Specialiste specialiste= fs.searchSpecialiste(nomMedecin);
+	public static void consultation(String nomPatient){
 		FabriquePatient fp = FabriquePatient.getINSTANCE();
 		Patient patient = fp.searchPatient(nomPatient);
+		FicheSejour fichePatient = patient.getFicheSejour();
 		
-		/*on regarde si il y a deja une consultation en attente */
-	if(patient==null){
-				System.out.println("Le patient n'existe pas");
-			} 
-	else {
-		if (patient.getFicheSejour().getProchainCompteRendu()!= null){
-			String nomMedecin2 = patient.getFicheSejour().getProchainCompteRendu().getSpecialiste().getName();
-			System.out.println("Le patient doit d'abord aller voir le medecin "+nomMedecin2);
-		}
-		else{
-			if (specialiste== null){
-				System.out.println("Le medecin n'existe pas");
+		if (patient == null){System.out.println("le patient n'existe pas.\n");}
+		else {
+			FabriqueSpecialiste fs = FabriqueSpecialiste.getINSTANCE();
+			System.out.println("Voici les noms des differents specialistes de "+nomPatient);
+			ArrayList<Specialiste> liste = fs.getNomSpecialistes();
+			for (Specialite spec: fichePatient.getListeSpecialite()){
+					System.out.println(spec.getName()+"\n");
 			}
-
-				else {
-					ArrayList<FicheSuivi> listeFicheSuivi = patient.getFicheSuivi();
-					ArrayList<CompteRendu> listeCompteRendu = new ArrayList<CompteRendu>();
-					for (FicheSuivi fiche : listeFicheSuivi){
-						if (fiche.getSpec().equals(specialiste.getSpecialite())){
-							listeCompteRendu = fiche.getComptesrendus();
-						}
+			for (Specialiste spec: liste){
+				if (fichePatient.getListeSpecialite().contains(spec.getSpecialite())){
+					System.out.println(spec.getName()+" : "+spec.getSpecialite().getName()+"\n");
+				}  
+			}
+			String nomMedecin = Main.Saisie("Indiquez celui qui vous interesse");
+			if (fs.searchSpecialiste(nomMedecin)==null){
+				System.out.println("le medecin n'existe pas");
+			}
+			else {
+				Specialiste specialiste= fs.searchSpecialiste(nomMedecin);
+				if (fichePatient.getListeSpecialite().contains(specialiste.getSpecialite())){
+					if (fichePatient.prochainCompteRenduPrevu()){
+						System.out.println("Ce patient doit d'abord voir le medecin : "+fichePatient.getProchainCompteRendu().getSpecialiste().getName());
 					}
-					for (CompteRendu compte : listeCompteRendu){
-						System.out.println(compte.getCorps());
+					else {
+							fichePatient.setProchainCompteRendu( new CompteRendu(specialiste));
+							remplirCompteRendu(nomPatient);
 					}
-					 FabriqueCompteRendu fcr = FabriqueCompteRendu.getINSTANCE();
-					 CompteRendu nouveauCompteRendu = fcr.createCompteRendu(specialiste);
-					 FicheSejour ficheSejour = patient.getFicheSejour();
-					 ficheSejour.setProchainCompteRendu(nouveauCompteRendu);
-					 System.out.println("La prochain rendez-vous a été créé.\n");
 					
+				}
+				else {System.out.println(nomPatient+" n'a pas cette specialite dans son séjour.");
 				}
 			}
 		}
+
 	}
 	
 	public static void remplirCompteRendu(String nomPatient){
@@ -80,12 +77,15 @@ public class Consultation {
 		CompteRendu cr = patient.getFicheSejour().getProchainCompteRendu();
 		String corps = cr.getCorps() + "\n\n";
 		String suite = Main.Saisie("Tapez votre commentaire:");
-		cr.setCorps(suite);
+		cr.setCorps(corps+suite);
 		String fini = Main.Saisie("La consultation est-elle terminée? Tapez \"O\" pour Oui et \"N\" pour Non");
-		if (fini=="O"){
+		if (fini.equals(new String("O"))){
 			patient.getFicheSejour().addCompteRendu(cr);
 			patient.getFicheSejour().setProchainCompteRendu(null);
+			boolean rt = patient.getFicheSejour().getListeSpecialite().remove(cr.getSpecialiste().getSpecialite());
+			System.out.println(rt+"putain");
 		}
 	}
-		
 }
+		
+

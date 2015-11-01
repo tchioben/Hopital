@@ -13,7 +13,7 @@ public class FicheSejour {
 	
 	private ArrayList<Specialite> listeSpecialite;
 
-	private CompteRendu prochainCompteRendu;
+	private CompteRendu prochainCompteRendu=null;
 	
 	public FicheSejour(){
 		this.lesComptesRendus=new HashMap<Specialite,ArrayList<CompteRendu>>();
@@ -50,7 +50,7 @@ public class FicheSejour {
 	 * @return true si la specialité existe false sinon
 	 */
 	public boolean specialiteExiste(Specialite spec){
-		return (this.lesComptesRendus.get(spec)!=null);
+		return (this.listeSpecialite.contains(spec));
 	}
 	
 	/**
@@ -60,6 +60,7 @@ public class FicheSejour {
 	public void addSpecialite(Specialite spec){
 		if (!this.specialiteExiste(spec)){
 			this.lesComptesRendus.put(spec, new ArrayList<CompteRendu>());
+			this.listeSpecialite.add(spec);
 		}
 	}
 	/**
@@ -71,6 +72,7 @@ public class FicheSejour {
 		Specialite spec= medecin.getSpecialite();
 		this.addSpecialite(spec);
 		this.lesComptesRendus.get(spec).add(cr);
+		this.addSpecialite(spec);
 	}
 	
 	public String SpeToString(){
@@ -97,8 +99,11 @@ public class FicheSejour {
 	}
 	
 	public ArrayList<CompteRendu> listeCompteRendu(){
+		this.addSpecialite(new Specialite("Odontologie"));
+		System.out.println("pk pas");
 		ArrayList<CompteRendu> lcr = new ArrayList<CompteRendu>();
-		for (Specialite spec:listeSpecialite){
+		for (Specialite spec:this.listeSpecialite){
+			System.out.println(spec.getName());
 			ArrayList<CompteRendu> lcr2 = this.lesComptesRendus.get(spec);
 			for ( CompteRendu cr: lcr2){
 				lcr.add(cr);
@@ -109,7 +114,7 @@ public class FicheSejour {
 	
 	public void imprimeCompteRendu(){
 		ArrayList<CompteRendu> lcr = this.listeCompteRendu();
-		int i = 0;
+		int i = 1;
 		for (CompteRendu cr:lcr){
 			System.out.println("\nCompte Rendu numéro "+i+":");
 			System.out.println("\nSpécialite : "+cr.getSpecialiste().getSpecialite().getName());
@@ -132,5 +137,14 @@ public class FicheSejour {
 	public void setProchainCompteRendu(CompteRendu prochainCompteRendu) {
 		this.prochainCompteRendu = prochainCompteRendu;
 	}
+	
+	/**
+	 * the variable prochainCompteRendu
+	 * @return true if she is empty else false
+	 */
+	public boolean prochainCompteRenduPrevu(){
+		if ( this.prochainCompteRendu==null){return false;} else {return true;}
+	}
+	 
 }
 

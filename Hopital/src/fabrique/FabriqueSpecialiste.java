@@ -3,7 +3,9 @@
  */
 package fabrique;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+
 import domaine.Specialiste;
 import domaine.Specialite;
 
@@ -15,8 +17,11 @@ public class FabriqueSpecialiste {
 	/** Les specialistes de l'hopital */
 	private HashMap<String,Specialiste> lesSpecialistes;
 	
+	private ArrayList<Specialiste> nomSpecialistes;
+	
 	private FabriqueSpecialiste(){
 		this.lesSpecialistes = new HashMap<String,Specialiste>();
+		this.setNomSpecialistes(new ArrayList<Specialiste>());
 	}
 	
 	/** Une instance de la fabrique */
@@ -42,11 +47,26 @@ public class FabriqueSpecialiste {
 	public Specialiste createSpecialiste(String name, Specialite specialite){
 		Specialiste p = new Specialiste(name,specialite);
 		this.setSpecialiste(p);
+		this.nomSpecialistes.add(p);
 		return p;
 	}
 	
 	public Specialiste searchSpecialiste(String name){
 		return this.getLesSpecialistes().get(name); //get renvoie la valeur correspondant à la clé précisée OU Null si pas de clé/valeur
+	}
+
+	/**
+	 * @return the nomSpecialistes
+	 */
+	public ArrayList<Specialiste> getNomSpecialistes() {
+		return nomSpecialistes;
+	}
+
+	/**
+	 * @param arrayList the nomSpecialistes to set
+	 */
+	public void setNomSpecialistes(ArrayList<Specialiste> arrayList) {
+		this.nomSpecialistes = arrayList;
 	}
 	
 	

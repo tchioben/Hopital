@@ -24,9 +24,9 @@ public class VisualiserSejour {
 			System.out.println("Le Patient n'existe pas");
 		}
 		else {
+			System.out.println("tu fonctionne?");
 			FicheSejour fs = patient.getFicheSejour();
-			fs.imprimeCompteRendu();
-				
+			fs.imprimeCompteRendu();			
 			}
 		}
 }
