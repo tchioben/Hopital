@@ -27,7 +27,7 @@ public class EntreePatient {
 	//public EntreePatient(){}
 	
 	/** Réalise l'entree d'un patient */
-	public static void EntreeDunPatient() throws Exception{
+	public static void EntreeDunPatient() {
 		FabriquePatient fp = FabriquePatient.getINSTANCE();
 		String NomPatient = EntreePatient.SaisieNomPatient();
 		Patient p = fp.searchPatient(NomPatient);
@@ -56,7 +56,7 @@ public class EntreePatient {
 			}
 			System.out.println("Ce patient devra consulter les specialistes en " + p.getFicheSejour().SpeToString());
 		} else {
-			throw (new Exception("Ce patient est déjà entré dans l'hopital !"));
+			System.out.println("Ce patient est déjà entré dans l'hopital !");
 		}
 	}
 	
@@ -90,7 +90,8 @@ public class EntreePatient {
 	 */
 	public static ArrayList<String> SaisieSpecialites(){
 		String Spes = Main.Saisie("les specialites que doit consulter le patient\n"
-				+ "(séparez les différentes spécialités par des point-virgules)");
+				+ "(séparez les différentes spécialités par des point-virgules)\n"
+				+ "Les specialites : " + FabriqueSpecialite.getINSTANCE().imprimeSpecialites());
 		ArrayList<String> SpeList = new ArrayList<String>(Arrays.asList(Spes.split(";")));
 		return SpeList;
 	}
