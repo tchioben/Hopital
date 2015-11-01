@@ -100,7 +100,7 @@ public class Patient {
 	/** Ajoute une fiche de suivi au patient
 	 * @param fs la fiche de suivi a attribuer au patient
 	 */
-	public void add(FicheSuivi fs) {
+	public void addFicheSuivi(FicheSuivi fs) {
 		this.ficheSuivi.add(fs);		
 	}
 	
@@ -119,4 +119,12 @@ public class Patient {
 			this.ficheSejour = fs;
 		}
 	}
+	public FicheSuivi searchFicheSuivi(Specialite spe) {
+		for (FicheSuivi fs : this.getFicheSuivi()) {
+			if(fs.getSpec() == spe){
+				return fs;
+			}
+		}
+		return null;
+	}	
 }

@@ -4,8 +4,10 @@
 package metier;
 
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.HashMap;
+import java.util.Map.Entry;
 
+import domaine.CompteRendu;
 import domaine.FicheSejour;
 import domaine.FicheSuivi;
 import domaine.Patient;
@@ -33,7 +35,7 @@ public class SortiePatient {
 			return ;
 		}
 		FicheSejour FSej = p.getFicheSejour(); // = HashMap<Specialite, ArrayList<CompteRendu>> + ArrayList<Specalite>
-<<<<<<< HEAD
+
 		HashMap<Specialite, ArrayList<CompteRendu>> HMSpeCpteRdus = FSej.getFichesSuivi();
 		if (HMSpeCpteRdus.size()==0){
 			System.out.println("Le patient " + p.getName() + " n'a pas de séjour en cours.\n"
@@ -58,37 +60,6 @@ public class SortiePatient {
 				HMSpeCpteRdus.remove(spe);
 			}
 		}
-=======
-		if (FSej == null){
-			System.out.println("Ce patient n'a pas de séjout en cours.\nIl est peut-etre deja sorti ou il n'est pas encore entre.");
-			return;
-		}
-		// FicheSejour -> FicheSuivi
-		System.out.println("Transfert de la fiche de sejour vers la fiche de suivi en cours ...");
-		ArrayList<FicheSuivi> lFichSuiv = p.getFicheSuivi();
-		ArrayList<Specialite> lSpes = FSej.getListeSpecialite();
-		for (Specialite spe : lSpes) { // Pour toutes les specialites de la fiche de sejour
-			Iterator<FicheSuivi> it = lFichSuiv.iterator();
-			 while (it.hasNext()) {
-				FicheSuivi FichSuiv = it.next();
-				if (FichSuiv.getSpec() == spe){
-					FichSuiv.setComptesrendus((FSej.getComptesRendus(spe)));
-					System.out.println("\tLe(s) compte(s) rendu(s) de la specialite " + spe.getName() + " \n\ta(ont) été ajouté(s) à la fiche de suivi du patient " + p.getName() + ".");
-					FSej.removeSpeEtComptesRendus(spe);
-				}
-			 }	 
-		}
-		if (! lSpes.isEmpty()){
-			 FabriqueFicheSuivi ffsuiv = FabriqueFicheSuivi.getINSTANCE();
-			 for (Specialite spe : lSpes) {
-				 FicheSuivi fSuiv = ffsuiv.createFicheSuivi(spe);
-				 fSuiv.setComptesrendus(FSej.getComptesRendus(spe));
-				 System.out.println("\tLe(s) compte(s) rendu(s) de la specialite " + spe.getName() +" \n\ta(ont) été ajouté(s) à la fiche de suivi du patient " + p.getName() + ".");
-			 }
-			 
-		 }
-		
->>>>>>> parent of 526d9b0... Revert "Revert "RÃ©alisation de la sortie d'un patient + creation specialistes dans Main""
 	}
 	
 	/** Demande la saisie du nom du patient
