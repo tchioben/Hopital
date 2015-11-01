@@ -40,8 +40,11 @@ public class FabriqueSpecialite {
 
 	/** Crée une Specialite */
 	public Specialite createSpecialite(String name){
-		Specialite p = new Specialite(name);
-		this.setSpecialite(p);
+		Specialite p = this.searchSpecialite(name);
+		if (p==null){
+			p = new Specialite(name);
+			this.setSpecialite(p);
+		}
 		return p;
 	}
 	

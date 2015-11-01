@@ -9,23 +9,21 @@ import java.util.Scanner;
 import domaine.Specialite;
 import fabrique.FabriquePatient;
 import fabrique.FabriqueSpecialiste;
+import fabrique.FabriqueSpecialite;
 
 /**
  * @author Léa Vanelle, Benoît Bailleul
  *
  */
 public class Main {
-
+	public static Scanner sc = new Scanner(System.in);
 	/**
 	 * Saisie d'un objet
 	 * @return le nom de l'objet recherché
 	 */
 	public static String Saisie(String objet){
 		System.out.println("Veuillez entrer " + objet +" : ");
-		Scanner sc = new Scanner(System.in);
 		String sObjet = sc.nextLine();
-		// sc.nextLine();
-		//sc.close();
 		return sObjet;
 	}
 	
@@ -33,14 +31,21 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		FabriqueSpecialiste fspec = FabriqueSpecialiste.getINSTANCE();
-		fspec.createSpecialiste("benoit", new Specialite("Ophtalmo"));
-		// TODO Autre cas
+		FabriqueSpecialiste fSpecialiste = FabriqueSpecialiste.getINSTANCE();
+		FabriqueSpecialite fSpecialite = FabriqueSpecialite.getINSTANCE();
+		fSpecialiste.createSpecialiste("Benoit", fSpecialite.createSpecialite("Ophtalmologie"));
+		fSpecialiste.createSpecialiste("Lea", fSpecialite.createSpecialite("Odontologie"));
+		fSpecialiste.createSpecialiste("Richard", fSpecialite.createSpecialite("Odontologie"));
+		fSpecialiste.createSpecialiste("Laurence", fSpecialite.createSpecialite("Gastroenterologie"));
+		fSpecialiste.createSpecialiste("Remy", fSpecialite.createSpecialite("Orthopedie"));
+		fSpecialiste.createSpecialiste("Meyer", fSpecialite.createSpecialite("Orthopedie"));
+		fSpecialiste.createSpecialiste("Mireille", fSpecialite.createSpecialite("Esthetique"));
+		fSpecialiste.createSpecialiste("Jean-Edouard", fSpecialite.createSpecialite("Esthetique"));
 		String choix = "";
 		while (choix != "0"){ 
 			System.out.println("Que voulez vous faire ?\n - Sortir : tapez 0\n - Réaliser l'entrée d'un patient : tapez 1\n "
-					+ "- Ajouter une consultation à un patient: tapez 2\n"
-					+ "- Visualiser la fiche séjour d'un patient: tapez 3\n"
+					+ "\t- Ajouter une consultation à un patient: tapez 2\n"
+					+ "\t- Visualiser la fiche séjour d'un patient: tapez 3\n"
 					+ "\t- Réaliser la sortir d'un patient : taper 4"
 			);
 			choix = Main.Saisie("le numéro correspondant à votre choix");
