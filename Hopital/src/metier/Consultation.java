@@ -37,32 +37,54 @@ public class Consultation {
 		Specialiste specialiste= fs.searchSpecialiste(nomMedecin);
 		FabriquePatient fp = FabriquePatient.getINSTANCE();
 		Patient patient = fp.searchPatient(nomPatient);
-		if (specialiste== null){
-			System.out.println("Le medecin n'existe pas");
-		}
-		else {
-			if(patient==null){
+		
+		/*on regarde si il y a deja une consultation en attente */
+	if(patient==null){
 				System.out.println("Le patient n'existe pas");
+			} 
+	else {
+		if (patient.getFicheSejour().getProchainCompteRendu()!= null){
+			String nomMedecin2 = patient.getFicheSejour().getProchainCompteRendu().getSpecialiste().getName();
+			System.out.println("Le patient doit d'abord aller voir le medecin "+nomMedecin2);
+		}
+		else{
+			if (specialiste== null){
+				System.out.println("Le medecin n'existe pas");
 			}
-			else {
-				ArrayList<FicheSuivi> listeFicheSuivi = patient.getFicheSuivi();
-				ArrayList<CompteRendu> listeCompteRendu = new ArrayList<CompteRendu>();
-				for (FicheSuivi fiche : listeFicheSuivi){
-					if (fiche.getSpec().equals(specialiste.getSpecialite())){
-						listeCompteRendu = fiche.getComptesrendus();
+
+				else {
+					ArrayList<FicheSuivi> listeFicheSuivi = patient.getFicheSuivi();
+					ArrayList<CompteRendu> listeCompteRendu = new ArrayList<CompteRendu>();
+					for (FicheSuivi fiche : listeFicheSuivi){
+						if (fiche.getSpec().equals(specialiste.getSpecialite())){
+							listeCompteRendu = fiche.getComptesrendus();
+						}
 					}
+					for (CompteRendu compte : listeCompteRendu){
+						System.out.println(compte.getCorps());
+					}
+					 FabriqueCompteRendu fcr = FabriqueCompteRendu.getINSTANCE();
+					 CompteRendu nouveauCompteRendu = fcr.createCompteRendu(specialiste);
+					 FicheSejour ficheSejour = patient.getFicheSejour();
+					 ficheSejour.setProchainCompteRendu(nouveauCompteRendu);
+					 System.out.println("La prochain rendez-vous a été créé.\n");
+					
 				}
-				for (CompteRendu compte : listeCompteRendu){
-					System.out.println(compte.getCorps());
-				}
-				 FabriqueFicheSejour ffs = FabriqueFicheSejour.getINSTANCE();
-				 FabriqueCompteRendu fcr = FabriqueCompteRendu.getINSTANCE();
-				 CompteRendu nouveauCompteRendu = fcr.createCompteRendu(specialiste);
-				 FicheSejour nouvelleFicheSejour = ffs.createFicheSejour(patient);
-				 nouvelleFicheSejour.addCompteRendu(nouveauCompteRendu);
-			
-				
 			}
+		}
+	}
+	
+	public static void remplirCompteRendu(String nomPatient){
+		FabriquePatient fp = FabriquePatient.getINSTANCE();
+		Patient patient = fp.searchPatient(nomPatient);
+		CompteRendu cr = patient.getFicheSejour().getProchainCompteRendu();
+		String corps = cr.getCorps() + "\n\n";
+		String suite = Main.Saisie("Tapez votre commentaire:");
+		cr.setCorps(suite);
+		String fini = Main.Saisie("La consultation est-elle terminée? Tapez \"O\" pour Oui et \"N\" pour Non");
+		if (fini=="O"){
+			patient.getFicheSejour().addCompteRendu(cr);
+			patient.getFicheSejour().setProchainCompteRendu(null);
 		}
 	}
 		

@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Set;
 
 /**
+ * Fiche séjour qui est conservé que durant le séjour du patient
  * @author Léa Vanelle, Benoît Bailleul
  */
 public class FicheSejour {
@@ -11,6 +12,8 @@ public class FicheSejour {
 	private HashMap<Specialite,ArrayList<CompteRendu>> lesComptesRendus;
 	
 	private ArrayList<Specialite> listeSpecialite;
+	
+	private CompteRendu prochainCompteRendu;
 	
 	public FicheSejour(){
 		this.lesComptesRendus=new HashMap<Specialite,ArrayList<CompteRendu>>();
@@ -66,7 +69,7 @@ public class FicheSejour {
 	public void addCompteRendu(CompteRendu cr){
 		Specialiste medecin = cr.getSpecialiste();
 		Specialite spec= medecin.getSpecialite();
-		this.addSpecialite(spec);
+		if (!specialiteExiste(spec)) {this.addSpecialite(spec);}
 		this.lesComptesRendus.get(spec).add(cr);
 	}
 	
@@ -106,8 +109,9 @@ public class FicheSejour {
 	
 	
 	public void imprimeCompteRendu(){
+		System.out.println("il n'y a pas de compte rendu");
 		ArrayList<CompteRendu> lcr = this.listeCompteRendu();
-		int i = 0;
+		int i = 1;
 		for (CompteRendu cr:lcr){
 			System.out.println("\nCompte Rendu numéro "+i+":");
 			System.out.println("\nSpécialite : "+cr.getSpecialiste().getSpecialite().getName());
@@ -115,5 +119,19 @@ public class FicheSejour {
 			System.out.println("\n"+cr.getCorps()+"\n");
 			i += 1;
 		}
+	}
+
+	/**
+	 * @return the prochainCompteRendu
+	 */
+	public CompteRendu getProchainCompteRendu() {
+		return prochainCompteRendu;
+	}
+
+	/**
+	 * @param prochainCompteRendu the prochainCompteRendu to set
+	 */
+	public void setProchainCompteRendu(CompteRendu prochainCompteRendu) {
+		this.prochainCompteRendu = prochainCompteRendu;
 	}
 }

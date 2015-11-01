@@ -57,10 +57,14 @@ public class Main {
 				Consultation.ajouteConsultation(nomMedecin, nomPatient);
 				break;
 			case "3":
-				String nomPatient2 = Saisie("le nom du patient");
-				VisualiserSejour.visualiserSejour(nomPatient2);
+				String nomPatient2 = Main.Saisie("Pour quel patient voulez-vous changer un compte-rendu?");
+				Consultation.remplirCompteRendu(nomPatient2);
 				break;
 			case "4":
+				String nomPatient3 = Saisie("le nom du patient");
+				VisualiserSejour.visualiserSejour(nomPatient3);
+				break;
+			case "5":
 				SortiePatient.SortieDunPatient();
 				break;
 			case "6":

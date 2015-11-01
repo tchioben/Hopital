@@ -20,4 +20,10 @@ public class TestCompteRendu {
 		
 	}
 	
+	@Test
+	public void testCorps(){
+		CompteRendu spec= new CompteRendu(new Specialiste("benoit",new Specialite("Dentiste")));
+		assertTrue("pas de null?",spec.getCorps()!= null);
+	}
+	
 }

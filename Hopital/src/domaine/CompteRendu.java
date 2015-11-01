@@ -25,11 +25,13 @@ public class CompteRendu {
 	public CompteRendu(Specialiste spec){
 		this.specialiste= spec;
 		this.date= Calendar.getInstance().getTime();
+		this.corps="";
 	}
 	
 	public CompteRendu(Specialiste spec, Date date){
 		this.specialiste= spec;
 		this.date= date;
+		this.corps="";
 	}
 	
 	/** @return le specialiste */
