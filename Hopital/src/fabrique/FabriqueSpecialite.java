@@ -4,6 +4,7 @@
 package fabrique;
 
 import java.util.HashMap;
+import java.util.Map.Entry;
 
 import domaine.Specialite;
 
@@ -40,12 +41,23 @@ public class FabriqueSpecialite {
 
 	/** Crée une Specialite */
 	public Specialite createSpecialite(String name){
-		Specialite p = new Specialite(name);
-		this.setSpecialite(p);
+		Specialite p = this.searchSpecialite(name);
+		if (p==null){
+			p = new Specialite(name);
+			this.setSpecialite(p);
+		}
 		return p;
 	}
 	
 	public Specialite searchSpecialite(String name){
 		return this.getLesSpecialites().get(name); //get renvoie la valeur correspondant à la clé précisée OU Null si pas de clé/valeur
+	}
+
+	public String imprimeSpecialites() {
+		String lesSpes = "";
+		for (Entry<String, Specialite> setSpe : this.lesSpecialites.entrySet()) {
+			lesSpes += setSpe.getKey() + " / ";
+		}
+		return lesSpes.substring(0, lesSpes.length()-4);
 	}
 }

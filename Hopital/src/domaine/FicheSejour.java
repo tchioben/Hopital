@@ -1,10 +1,10 @@
+
 package domaine;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 
 /**
- * Fiche séjour qui est conservé que durant le séjour du patient
  * @author Léa Vanelle, Benoît Bailleul
  */
 public class FicheSejour {
@@ -12,7 +12,7 @@ public class FicheSejour {
 	private HashMap<Specialite,ArrayList<CompteRendu>> lesComptesRendus;
 	
 	private ArrayList<Specialite> listeSpecialite;
-	
+
 	private CompteRendu prochainCompteRendu;
 	
 	public FicheSejour(){
@@ -69,7 +69,7 @@ public class FicheSejour {
 	public void addCompteRendu(CompteRendu cr){
 		Specialiste medecin = cr.getSpecialiste();
 		Specialite spec= medecin.getSpecialite();
-		if (!specialiteExiste(spec)) {this.addSpecialite(spec);}
+		this.addSpecialite(spec);
 		this.lesComptesRendus.get(spec).add(cr);
 	}
 	
@@ -107,11 +107,9 @@ public class FicheSejour {
 		return lcr;
 	}
 	
-	
 	public void imprimeCompteRendu(){
-		System.out.println("il n'y a pas de compte rendu");
 		ArrayList<CompteRendu> lcr = this.listeCompteRendu();
-		int i = 1;
+		int i = 0;
 		for (CompteRendu cr:lcr){
 			System.out.println("\nCompte Rendu numéro "+i+":");
 			System.out.println("\nSpécialite : "+cr.getSpecialiste().getSpecialite().getName());
@@ -120,7 +118,7 @@ public class FicheSejour {
 			i += 1;
 		}
 	}
-
+	
 	/**
 	 * @return the prochainCompteRendu
 	 */
@@ -135,3 +133,4 @@ public class FicheSejour {
 		this.prochainCompteRendu = prochainCompteRendu;
 	}
 }
+
