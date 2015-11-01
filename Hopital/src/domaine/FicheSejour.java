@@ -104,6 +104,7 @@ public class FicheSejour {
 		return lcr;
 	}
 	
+	
 	public void imprimeCompteRendu(){
 		ArrayList<CompteRendu> lcr = this.listeCompteRendu();
 		int i = 0;
