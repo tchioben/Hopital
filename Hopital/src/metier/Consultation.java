@@ -30,6 +30,7 @@ public class Consultation {
 	 * @param nomMedecin
 	 * @param nomPatient
 	 */
+	@SuppressWarnings("unused")
 	public static void consultation(String nomPatient){
 		FabriquePatient fp = FabriquePatient.getINSTANCE();
 		Patient patient = fp.searchPatient(nomPatient);
@@ -56,7 +57,10 @@ public class Consultation {
 				Specialiste specialiste= fs.searchSpecialiste(nomMedecin);
 				if (fichePatient.getListeSpecialite().contains(specialiste.getSpecialite())){
 					if (fichePatient.prochainCompteRenduPrevu()){
-						System.out.println("Ce patient doit d'abord voir le medecin : "+fichePatient.getProchainCompteRendu().getSpecialiste().getName());
+						if (nomMedecin.equals(fichePatient.getProchainCompteRendu().getSpecialiste().getName()))
+							{remplirCompteRendu(nomPatient);}
+							else {System.out.println("Ce patient doit d'abord voir le medecin : "+fichePatient.getProchainCompteRendu().getSpecialiste().getName());}
+						
 					}
 					else {
 							fichePatient.setProchainCompteRendu( new CompteRendu(specialiste));
@@ -76,14 +80,15 @@ public class Consultation {
 		Patient patient = fp.searchPatient(nomPatient);
 		CompteRendu cr = patient.getFicheSejour().getProchainCompteRendu();
 		String corps = cr.getCorps() + "\n\n";
-		String suite = Main.Saisie("Tapez votre commentaire:");
+		String suite = Main.Saisie(" votre commentaire:");
 		cr.setCorps(corps+suite);
-		String fini = Main.Saisie("La consultation est-elle terminée? Tapez \"O\" pour Oui et \"N\" pour Non");
-		if (fini.equals(new String("O"))){
-			patient.getFicheSejour().addCompteRendu(cr);
-			patient.getFicheSejour().setProchainCompteRendu(null);
-			boolean rt = patient.getFicheSejour().getListeSpecialite().remove(cr.getSpecialiste().getSpecialite());
-			System.out.println(rt+"putain");
+		String fini = "";
+		while (!fini.equals(new String("N")) && !fini.equals(new String("O"))){	
+			fini = Main.Saisie("La consultation est-elle terminée? Tapez \"O\" pour Oui et \"N\" pour Non");
+			if (fini.equals(new String("O"))){
+				patient.getFicheSejour().addCompteRendu(cr);
+				patient.getFicheSejour().setProchainCompteRendu(null);
+			}
 		}
 	}
 }

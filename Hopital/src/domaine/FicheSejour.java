@@ -59,7 +59,9 @@ public class FicheSejour {
 	 */
 	public void addSpecialite(Specialite spec){
 		if (!this.specialiteExiste(spec)){
-			this.lesComptesRendus.put(spec, new ArrayList<CompteRendu>());
+			if (this.lesComptesRendus.get(spec)==null){
+				this.lesComptesRendus.put(spec, new ArrayList<CompteRendu>());
+			}
 			this.listeSpecialite.add(spec);
 		}
 	}
@@ -72,7 +74,6 @@ public class FicheSejour {
 		Specialite spec= medecin.getSpecialite();
 		this.addSpecialite(spec);
 		this.lesComptesRendus.get(spec).add(cr);
-		this.addSpecialite(spec);
 	}
 	
 	public String SpeToString(){
@@ -99,11 +100,8 @@ public class FicheSejour {
 	}
 	
 	public ArrayList<CompteRendu> listeCompteRendu(){
-		this.addSpecialite(new Specialite("Odontologie"));
-		System.out.println("pk pas");
 		ArrayList<CompteRendu> lcr = new ArrayList<CompteRendu>();
 		for (Specialite spec:this.listeSpecialite){
-			System.out.println(spec.getName());
 			ArrayList<CompteRendu> lcr2 = this.lesComptesRendus.get(spec);
 			for ( CompteRendu cr: lcr2){
 				lcr.add(cr);
@@ -119,7 +117,8 @@ public class FicheSejour {
 			System.out.println("\nCompte Rendu numéro "+i+":");
 			System.out.println("\nSpécialite : "+cr.getSpecialiste().getSpecialite().getName());
 			System.out.println("\nMédecin : "+cr.getSpecialiste().getName());
-			System.out.println("\n"+cr.getCorps()+"\n");
+			System.out.println(cr.getCorps());
+			System.out.println("+------------------------------------------+");
 			i += 1;
 		}
 	}

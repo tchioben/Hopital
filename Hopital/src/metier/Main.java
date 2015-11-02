@@ -38,48 +38,57 @@ public class Main {
 		fSpecialiste.createSpecialiste("Meyer", fSpecialite.createSpecialite("Orthopedie"));
 		fSpecialiste.createSpecialiste("Mireille", fSpecialite.createSpecialite("Esthetique"));
 		fSpecialiste.createSpecialiste("Jean-Edouard", fSpecialite.createSpecialite("Esthetique"));
-		String choix = "";
-		while (choix != "0"){ 
-			System.out.println("Que voulez vous faire ?\n "
-					+ "\t- Sortir : tapez 0\n"
-					+ "\t- Réaliser l'entrée d'un patient : tapez 1\n "
-					+ "\t- Ajouter une consultation à un patient: tapez 2\n"
-					+ "\t- Visualiser la fiche séjour d'un patient: tapez 3\n"
-					+ "\t- Réaliser la sortie d'un patient : taper 4"
-			);
-			choix = Main.Saisie("le numéro correspondant à votre choix");
-			switch (choix) {
-			case "1": 
-				EntreePatient.EntreeDunPatient();
-				choix = "";
-				break;
-			case "2":
-				String nomPatient = Saisie("le nom du patient");
-				Consultation.consultation(nomPatient);
-				choix = "";
-				break;
-			case "3":
-				String nomPatient2 = Saisie("le nom du patient");
-				VisualiserSejour.visualiserSejour(nomPatient2);
-				choix = "";
-				break;
-			case "4":
-				String nomPatient3 = Saisie("le nom du patient");
-				VisualiserSejour.visualiserSejour(nomPatient3);
-				break;
-			case "5":
-				SortiePatient.SortieDunPatient();
-				choix = "";
-				break;
-
-			
-			default: choix = "0";
-				break;
-			}
-			
-		}
+		interfaceMain();
 		System.out.println("Au revoir et à bientôt");
 	}
 
-
+	public static void interfaceMain(){
+		try{
+			String choix = "";
+			while (choix!="0"){ 
+				System.out.println("Que voulez vous faire ?\n "
+						+ "\t- Sortir : tapez 0\n"
+						+ "\t- Réaliser l'entrée d'un patient : tapez 1\n "
+						+ "\t- Ajouter une consultation à un patient: tapez 2\n"
+						+ "\t- Visualiser la fiche séjour d'un patient: tapez 3\n"
+						+ "\t- Réaliser la sortie d'un patient : taper 4"
+				);
+				choix = Main.Saisie("le numéro correspondant à votre choix");
+				switch (choix) {
+				case "1": 
+					EntreePatient.EntreeDunPatient();
+					choix = "";
+					break;
+				case "2":
+					String nomPatient = Saisie("le nom du patient");
+					Consultation.consultation(nomPatient);
+					choix = "";
+					break;
+				case "3":
+					String nomPatient2 = Saisie("le nom du patient");
+					VisualiserSejour.visualiserSejour(nomPatient2);
+					choix = "";
+					break;
+				case "4":
+					String nomPatient3 = Saisie("le nom du patient");
+					VisualiserSejour.visualiserSejour(nomPatient3);
+					break;
+				case "5":
+					SortiePatient.SortieDunPatient();
+					choix = "";
+					break;
+	
+				
+				default: choix = "0";
+					break;
+				}
+				
+			}
+		}
+		catch(Exception e){
+			System.out.println("une ou plusieurs informations ne sont pas correctes.");
+			interfaceMain();}
+	}
+	
+	
 }

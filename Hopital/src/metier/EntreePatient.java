@@ -50,7 +50,6 @@ public class EntreePatient {
 			FabriqueSpecialite fspe = FabriqueSpecialite.getINSTANCE();
 			// Ajout des spécialités à la fiche de sejour
 			for (String spe : spes) {
-				System.out.println("+++++++++++"+spe+"-----");
 				Specialite s = fspe.searchSpecialite(spe);
 				 if (s==null) { fs.addSpecialite(fspe.createSpecialite(spe)); }
 				 else { fs.addSpecialite(s);}
